@@ -1,0 +1,5 @@
+/vga/output_files
+/vga/greybox_tmp
+/vga/db
+/vga/incremental_db
+*.bak
