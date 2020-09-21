@@ -2,4 +2,6 @@
 /vga/greybox_tmp
 /vga/db
 /vga/incremental_db
+/vga/simulation
 *.bak
+*.rpt

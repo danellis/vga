@@ -1,0 +1,143 @@
+@startuml
+clock clk_sdram with period 1
+binary "clk_pixel" as clkp
+binary "sync_reset_n" as syncr
+concise "Command" as cmd
+concise "Address" as addr
+concise "DQ" as data
+
+@0.5 as :read
+@:read+7 as :out
+@:out+8 as :read_end
+
+@:read_end as :write
+@:write+4 as :in
+@:in+8 as :write_end
+
+@0
+data is {-}
+
+@:read
+cmd is "PRE"
+addr is "Bank"
+
+@:read+1
+cmd is ""
+addr is ""
+
+@:read+2
+cmd is "ACT"
+addr is "Row"
+
+@:read+3
+cmd is ""
+addr is ""
+
+@:read+4
+cmd is "READ"
+addr is "Column"
+
+@:read+5
+cmd is ""
+addr is ""
+
+@:read+6
+
+@:out
+data is "out 0"
+
+@:out+1
+data is "out 1"
+
+@:out+2
+data is "out 2"
+
+@:out+3
+data is "out 3"
+
+@:out+4
+data is "out 4"
+
+@:out+5
+data is "out 5"
+
+@:out+6
+data is "out 6"
+
+@:out+7
+data is "out 7"
+
+@:out+8
+data is {-}
+
+@:write
+cmd is "PRE"
+addr is "Bank"
+
+@:write+1
+cmd is ""
+addr is ""
+
+@:write+2
+cmd is "ACT"
+addr is "Row"
+
+@:write+3
+cmd is ""
+addr is ""
+
+@:write+4
+cmd is "WRITE"
+addr is "Column"
+
+@:write+5
+cmd is ""
+addr is ""
+
+@:write+6
+
+@:in
+data is "in 0"
+
+@:in+1
+data is "in 1"
+
+@:in+2
+data is "in 2"
+
+@:in+3
+data is "in 3"
+
+@:in+4
+data is "in 4"
+
+@:in+5
+data is "in 5"
+
+@:in+6
+data is "in 6"
+
+@:in+7
+data is "in 7"
+
+@:in+8
+data is {-}
+
+@clkp
+16 is high
+20 is low
+24 is high
+28 is low
+32 is high
+
+@syncr
+16 is high
+
+@32
+
+'highlight :read to :read_end #Gold:Read
+'highlight :write to :write_end #LightBlue:Write
+
+data@5 <-> @8 : CL
+clkp@0 <-> @16 : Frame delay
+@enduml
